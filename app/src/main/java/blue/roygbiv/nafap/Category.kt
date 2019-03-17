@@ -1,5 +1,5 @@
 package blue.roygbiv.nafap
 
 enum class Category {
-    Analytics, ApplicationIntegration
+    Analytics, ApplicationIntegration, ARAndVR, AWSCostManagement, Blockchain, BusinessApplications
 }

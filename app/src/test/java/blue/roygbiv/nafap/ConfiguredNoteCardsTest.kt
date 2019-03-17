@@ -1,31 +1,30 @@
 package blue.roygbiv.nafap
 
 import org.amshove.kluent.`should equal`
+import org.amshove.kluent.should
 import org.junit.Test
 
 class ConfiguredNoteCardsTest {
-    var subject = ConfiguredNoteCards()
+    private var subject = ConfiguredNoteCards()
 
     @Test
     fun iterate_over_NoteCards() {
         (0..5).forEach { x ->
-            run {
-                var foundCard = subject.getNextNoteCard()
-                var expectedCard = subject.noteCards[x]
+                val foundCard = subject.getNextNoteCard()
+                val expectedCard = subject.noteCards[x]
                 foundCard.name `should equal` expectedCard.name
-            }
         }
     }
 
     @Test
     fun iterator_set_to_0_after_reach_end_of_list() {
-        (0 until subject.noteCards.size).forEach {
-            run {
-                var foundCard = subject.getNextNoteCard()
-            }
+        val testNoteCards = subject.noteCards
+        (0 until testNoteCards.size - 1).forEach {
+            subject.getNextNoteCard()
         }
+        subject.getNextNoteCard().name `should equal` testNoteCards.last().name
 
-        subject.getNextNoteCard().name `should equal` subject.noteCards[0].name
-        subject.getNextNoteCard().name `should equal` subject.noteCards[1].name
+        subject.getNextNoteCard().name `should equal` testNoteCards[0].name
+        subject.getNextNoteCard().name `should equal` testNoteCards[1].name
     }
 }
